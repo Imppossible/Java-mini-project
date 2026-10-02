@@ -1,9 +1,9 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-
+import com.formdev.flatlaf.FlatDarkLaf;
 public class PasswordSecurityAnalyze extends JFrame {
-
+     
     private JPasswordField txtPassword;   
     private JTextField txtVisiblePassword; 
     private JButton btnCheck;
@@ -103,7 +103,7 @@ public class PasswordSecurityAnalyze extends JFrame {
                 StringBuilder sb = new StringBuilder();
                 sb.append("=== SECURITY AUDIT REPORT ===\n");
                 sb.append("Password: ").append(password).append("\n");
-                sb.append("Length: ").append(analyzer.getLength()).append(" characters\n");
+                sb.append("Length: ").append(analyzer.getlength()).append(" characters\n");
                 sb.append(String.format("Shannon Entropy: %.2f bits\n", entropy));
                 sb.append("Common Password Match: ").append(commonMatchResult).append("\n");
                 sb.append("Estimated Brute-Force Time:\n ").append(timeText).append(" (").append(status).append(")\n\n");
@@ -150,7 +150,14 @@ public class PasswordSecurityAnalyze extends JFrame {
     }
 
     public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
+        try {
+        
+        javax.swing.UIManager.setLookAndFeel(new FlatDarkLaf());
+    } catch (Exception ex) {
+        ex.printStackTrace();
+    }
+        
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
                 new PasswordSecurityAnalyze().setVisible(true);
@@ -158,3 +165,4 @@ public class PasswordSecurityAnalyze extends JFrame {
         });
     }
 }
+
